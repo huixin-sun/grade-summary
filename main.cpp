@@ -8,6 +8,8 @@ int main() {
     std::string token;
     int count = 0;
     double sum = 0;
+    double minimum = 100, maximum = 0;
+    int passed = 0;
     while (std::cin >> token) {
         std::istringstream input(token);
         double score;
@@ -18,6 +20,9 @@ int main() {
         }
         ++count;
         sum += score;
+        if (score < minimum) minimum = score;
+        if (score > maximum) maximum = score;
+        if (score >= 60) ++passed;
     }
     if (count == 0) {
         std::cerr << "Error: enter at least one score.\n";
@@ -25,6 +30,9 @@ int main() {
     }
     std::cout << "Count: " << count << '\n'
               << std::fixed << std::setprecision(2)
-              << "Average: " << sum / count << '\n';
+              << "Average: " << sum / count << '\n'
+              << "Minimum: " << minimum << '\n'
+              << "Maximum: " << maximum << '\n'
+              << "Pass rate: " << 100.0 * passed / count << "%\n";
     return 0;
 }
